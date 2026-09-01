@@ -4,6 +4,7 @@
 
 **Project status:** 🚧 In development — planning phase (see [ROADMAP](docs/ROADMAP.md))
 **Author:** [@mariodpbr-Leferyan](https://github.com/mariodpbr-Leferyan)
+**Repository:** [HomeBase-Project](https://github.com/mariodpbr-Leferyan/HomeBase-Project)
 **Stack:** Python (FastAPI) · PostgreSQL/SQLite · HTML/CSS/JS → PWA
 
 ---
@@ -42,8 +43,8 @@ All detailed documentation lives in the [`/docs`](docs/) folder, organized by to
 ## Quick install (once the code exists)
 
 ```bash
-git clone https://github.com/mariodpbr-Leferyan/homebase.git
-cd homebase
+git clone https://github.com/mariodpbr-Leferyan/HomeBase-Project.git
+cd HomeBase-Project
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
