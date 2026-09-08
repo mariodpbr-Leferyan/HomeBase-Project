@@ -1,0 +1,67 @@
+# Progress Log — HomeBase
+
+This log tracks work sessions on the project: what was done, time spent, and pauses. Entries are added chronologically, most recent at the bottom. Time and pause data is self-reported by the developer at the start/end of each session, since durations can't be tracked automatically.
+
+**How to use this log each session:**
+- At the start: state the date and, if resuming after a break, roughly how long the pause was.
+- At the end: a short summary gets added of what was accomplished.
+
+---
+
+## Session 1 — September 1, 2026
+
+**Phase:** 0 (Setup) → started Phase 1 (Foundation)
+
+**What was done:**
+- Installed Python, confirmed version
+- Installed Git, configured identity
+- Created `HomeBase-Project` repository on GitHub
+- Installed VSCode extensions (Python, Pylance, GitLens)
+- Fixed folder structure issues (nested zip extraction, `venv` in wrong location)
+- Created and activated `venv`, installed base dependencies, generated `requirements.txt`
+- Created `.gitignore`, resolved duplicate/incorrectly named file
+- First commit and push to GitHub (via OAuth browser login)
+- Set up GitHub Projects board (`HomeBase Roadmap`): Epic, Sprint, Priority fields; Board and Table views; repository labels
+- Created Sprint 0 issues (retroactively marked Done) and Sprint 1 issues (To Do)
+- Wrote first FastAPI code: `app/main.py` with a `/health` route
+- Hit and resolved a broken `venv` (stale Python path from folder move) — recreated it in the correct location
+- Confirmed the server runs and `/health` + `/docs` respond correctly
+
+**Status at end of session:** Phase 0 complete. Phase 1 started — first working route confirmed via FastAPI's `/docs` page. Progress committed and pushed to GitHub.
+
+**Pause after this session:** untracked/unknown duration (flagged retroactively as inaccurate — see Session 2 note).
+
+---
+
+## Session 2 — September 8, 2026
+
+**Resumed after:** an unspecified pause (longer than the initially assumed 7 days — exact length not tracked, per developer note). Starting this session, pause/resume durations will be reported explicitly going forward.
+
+**What was done so far this session:**
+- Set up this progress-tracking system and file
+- Reviewed session start checklist (venv active, `/health` confirmed working)
+- Explained SQLAlchemy setup concepts (engine, session, Base)
+- Provided `app/database.py` boilerplate (connection to SQLite via SQLAlchemy)
+- Started `Household` model (`app/models/household.py`) — columns left as an exercise, not yet completed
+- Clarified a normal `404 Not Found` on `/favicon.ico` (expected, no action needed)
+
+**Pause flagged at 13:44** — resumed at 15:52. **Pause duration: 2h 08min.**
+
+**What was done after resuming (15:52 → 17:48, ~1h 56min):**
+- Explained `database.py` line by line (engine, session factory, Base, `get_db` dependency pattern)
+- Explained `Column(TYPE, options)` syntax in detail, including `String(255)` length argument
+- Introduced the term "Pythonic" and agreed to always show the most Pythonic version first, plus one alternative, going forward
+- Wrote and debugged `app/models/household.py` together (fixed typos: `Strings`→`String`, `DataTime`→`DateTime`; removed invalid import line; fixed trailing commas creating tuples instead of assignments; fixed `:` vs `=` on `created_at`)
+- Verified the model imports cleanly (`python -c "from app.models.household import Household..."`)
+- Updated `app/main.py` to import `Household` and call `Base.metadata.create_all(bind=engine)` on startup
+- Verified `homebase.db` was created and the `households` table exists (via a temporary `check_db.py` script)
+- Discussed options to view the SQLite database visually (VSCode extension vs. DB Browser for SQLite vs. CLI) — recommended VSCode "SQLite Viewer" extension
+- Updated Sprint status on GitHub Projects board (done by developer)
+
+**Session 2 end: 17:48.**
+
+**Status at end of session:** `Household` model complete and verified against the live database. Ready to start the `User` model next (password hashing, foreign key to `Household`).
+
+**Reminder for next session start:** ✅ GitHub Projects board was updated this session — keep doing this at the end of every session (mark completed issues as Done, move next task to In Progress) so the board stays an accurate record.
+
+---
