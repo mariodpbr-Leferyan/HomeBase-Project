@@ -35,14 +35,14 @@ This log tracks work sessions on the project: what was done, time spent, and pau
 
 ## Session 2 — September 8, 2026
 
-**Resumed after:** an unspecified pause (longer than the initially assumed 7 days — exact length not tracked, per developer note). Starting this session, pause/resume durations will be reported explicitly going forward.
+**Resumed after:** an unspecified pause (longer than the initially assumed 7 days — exact length not tracked, per developer note). Starting this session, pause/resume durations are reported explicitly.
 
 **What was done so far this session:**
 - Set up this progress-tracking system and file
 - Reviewed session start checklist (venv active, `/health` confirmed working)
 - Explained SQLAlchemy setup concepts (engine, session, Base)
 - Provided `app/database.py` boilerplate (connection to SQLite via SQLAlchemy)
-- Started `Household` model (`app/models/household.py`) — columns left as an exercise, not yet completed
+- Started `Household` model (`app/models/household.py`) — columns left as an exercise
 - Clarified a normal `404 Not Found` on `/favicon.ico` (expected, no action needed)
 
 **Pause flagged at 13:44** — resumed at 15:52. **Pause duration: 2h 08min.**
@@ -52,10 +52,10 @@ This log tracks work sessions on the project: what was done, time spent, and pau
 - Explained `Column(TYPE, options)` syntax in detail, including `String(255)` length argument
 - Introduced the term "Pythonic" and agreed to always show the most Pythonic version first, plus one alternative, going forward
 - Wrote and debugged `app/models/household.py` together (fixed typos: `Strings`→`String`, `DataTime`→`DateTime`; removed invalid import line; fixed trailing commas creating tuples instead of assignments; fixed `:` vs `=` on `created_at`)
-- Verified the model imports cleanly (`python -c "from app.models.household import Household..."`)
+- Verified the model imports cleanly
 - Updated `app/main.py` to import `Household` and call `Base.metadata.create_all(bind=engine)` on startup
 - Verified `homebase.db` was created and the `households` table exists (via a temporary `check_db.py` script)
-- Discussed options to view the SQLite database visually (VSCode extension vs. DB Browser for SQLite vs. CLI) — recommended VSCode "SQLite Viewer" extension
+- Discussed options to view the SQLite database visually — recommended VSCode "SQLite Viewer" extension
 - Updated Sprint status on GitHub Projects board (done by developer)
 
 **Session 2 end: 17:48.**
@@ -73,16 +73,16 @@ This log tracks work sessions on the project: what was done, time spent, and pau
 **What was done so far this session:**
 - Explained foreign keys and password hashing concepts
 - Provided `app/security.py` (hash_password / verify_password using passlib/bcrypt)
-- Wrote and debugged `app/models/user.py` together — recurring mistakes caught and corrected: `:` vs `=` for field assignment (same issue as Household, now should be internalized), `Foreignkey`→`ForeignKey`, `integer`→`Integer`, `String=(255)`→`String(255)`, `class User(Base)=`→`class User(Base):`, PEP 8 spacing around `=` in keyword arguments
+- Wrote and debugged `app/models/user.py` together — recurring mistakes caught and corrected: `:` vs `=` for field assignment, `Foreignkey`→`ForeignKey`, `integer`→`Integer`, `String=(255)`→`String(255)`, `class User(Base)=`→`class User(Base):`, PEP 8 spacing around `=` in keyword arguments
 - Learned a VSCode regex Find & Replace trick to batch-fix `:` → `=` issues
 - Learned how to manage multiple terminals in VSCode (dropdown switch, split view, keyboard cycling)
 - Verified `User` model imports cleanly
 
 **Lunch break flagged at 14:29** — resumed at 15:23. **Break duration: 54min.**
 
-**What was done after resuming (15:23 → pause):**
+**What was done after resuming (15:23 → 16:10):**
 - VSCode split-pane navigation shortcuts (Ctrl+1/Ctrl+2, Ctrl+K then arrow)
-- Fixed `main.py`: added imports for `User`, removed an accidentally duplicated `class User(Base):` definition that had been pasted directly into `main.py` (should only ever live in `app/models/user.py` — one source of truth per class)
+- Fixed `main.py`: added imports for `User`, removed an accidentally duplicated `class User(Base):` definition that had been pasted directly into `main.py` (should only ever live in `app/models/user.py`)
 - Verified both `households` and `users` tables now exist in `homebase.db`
 - Introduced Pydantic schemas concept (why input/output shapes differ from the DB model)
 - Provided `app/schemas/user.py` (`UserCreate`, `UserResponse` — response deliberately excludes `password_hash`)
@@ -91,28 +91,59 @@ This log tracks work sessions on the project: what was done, time spent, and pau
 
 **Pause flagged at 16:10** — resumed at 16:37. **Pause duration: 27min.**
 
-**What was done after resuming (16:37 → 17:0x, session end):**
+**What was done after resuming (16:37 → session end):**
 - Explained FastAPI's `APIRouter` pattern and why routes get split into `app/routers/`
 - Provided `app/routers/users.py` skeleton (router setup, dependency injection via `Depends(get_db)`)
 - Wrote and completed the `POST /users/register` route together (hash password → build `User` → `db.add/commit/refresh` → `return`)
 - Wired the router into `app/main.py` via `app.include_router(users.router)`
 - Debugged a chain of real issues to get registration working end-to-end:
   - Typo `HTTTPException` → `HTTPException`
-  - Duplicate `class User(Base):` accidentally pasted directly into `main.py` (removed — one source of truth per model)
-  - `UserResponse` schema incorrectly included a `password` field (removed — this was actively leaking data in responses)
-  - Typo `has_password` → `hash_password`, and broken `verify_password` logic (`.verify.hash(...)` → `.verify(...)`) in `app/security.py`
-  - Version incompatibility between `passlib` and newer `bcrypt` (`AttributeError: module 'bcrypt' has no attribute '__about__'`) — resolved by pinning `bcrypt==4.0.1` in `requirements.txt`, discussed why pinning a dependency version is the correct professional fix vs. editing third-party library internals directly
-- Created and used a temporary `seed_household.py` script to insert a test household (id=1) so registration could be tested before a real `POST /households` route exists
+  - Duplicate `class User(Base):` accidentally pasted directly into `main.py` (removed)
+  - `UserResponse` schema incorrectly included a `password` field (removed — was leaking data in responses)
+  - Typo `has_password` → `hash_password`, and broken `verify_password` logic in `app/security.py`
+  - Version incompatibility between `passlib` and newer `bcrypt` (`AttributeError: module 'bcrypt' has no attribute '__about__'`) — resolved by pinning `bcrypt==4.0.1`; discussed why pinning a dependency is the correct professional fix vs. editing third-party library internals
+- Created and used a temporary `seed_household.py` script to insert a test household (id=1)
 - **Successfully tested `POST /users/register` end-to-end** — 200 OK, user created with hashed password, response correctly excludes password fields
 
-**Session 3 end.**
+**Reminders logged:** GitHub Projects board updated (register route → Done, login route → In Progress); `check_db.py` deleted; **`seed_household.py` intentionally kept** as a dev utility — flagged for removal once a real `POST /households` route exists.
 
-**Status at end of session:** Registration route fully working and verified. `Household` and `User` models, database connection, password hashing, and the first "write" endpoint are all complete and tested.
+**Session 3 closed at 18:04.**
+
+---
+
+## Session 4 — September 14, 2026
+
+**Resumed at:** 17:25. **Pause since last session: 3 days, 23h 21min** (Sept 10, 18:04 → Sept 14, 17:25).
+
+**What was done so far this session:**
+- Verified project still runs cleanly after the gap (venv, git pull, server, /docs)
+- Introduced JWT concept (header/payload/signature, why tokens avoid repeated password transmission)
+- Generated `SECRET_KEY`, created `.env` (real secret) and `.env.example` (placeholder template) — clarified the distinction and confirmed `.env` is properly excluded via `.gitignore` / `git status`
+- Wrote and debugged `app/schemas/token.py` (fixed: invalid `JWT`/`jwt.encode(...)` used as field types → corrected to plain `str` fields)
+- Wrote and debugged `app/security.py` additions for token creation — fixed: imports scattered mid-file (moved to top, PEP 8 import ordering), missing parentheses on `load_dotenv()`, docstring typos, spacing around function parens
+- Hit and resolved a `ModuleNotFoundError: No module named 'dotenv'` — ruled out a duplicate `.venv` folder (false alarm, prompt display quirk), root cause was `python-dotenv` never installed in this venv — fixed with `pip install python-dotenv`
+- Verified `security.py` imports cleanly end to end (hash, verify, create_access_token)
+- Started `app/routers/auth.py` — router skeleton and `/auth/login` TODO provided, not yet completed by developer
+- Also updated documentation (`README.md`, `docs/LEARNING_GUIDE.md`, `docs/ROADMAP.md`, `docs/SETUP.md`, `docs/PROJECT_MANAGEMENT.md`) to reflect AI-guided authorship framing instead of first-person AI narration
+
+**Dinner break flagged at 19:17** — resumed at 20:57. **Break duration: 1h 40min.**
+
+**What was done after resuming (20:57 → session end):**
+- Wrote and debugged `app/routers/auth.py` together — fixed: `HtttpException` typo (twice), malformed decorator string swallowing `response_model=Token` into the path, `details`→`detail` parameter name, discarded return value from `create_access_token(...)` (needed assignment), incorrect `return {Token(access_token, token_type)}` (set literal with undefined variables) → corrected to a plain dict matching the `Token` schema
+- Wired `auth.router` into `main.py` — caught a real bug: `include_router()` only accepts one router per call, not two positional arguments together
+- Debugged a `JWSError: Expecting a string- or bytes-formatted key` — traced to `SECRET_KEY` being `None`, root cause: `.env` (and `.env.example`) had been created inside `app/` instead of the project root — same misplaced-file pattern as `seed_household.py` earlier in the project; moved both files to the correct location and verified `SECRET_KEY` loads correctly in isolation before retrying
+- Hit a one-off "Failed to fetch" browser error in `/docs`, resolved by restarting `uvicorn` and refreshing the page
+- **Successfully tested `POST /auth/login` end-to-end** — 200 OK, real signed JWT returned (`access_token` + `"token_type": "bearer"`)
+
+**Session 4 closed.**
+
+**Status at end of session:** Full authentication flow working — registration, password hashing, login, and JWT issuance all verified live. `Household`, `User`, `/users/register`, `/auth/login` all complete.
 
 **Reminders for next session:**
-- ✅ Update GitHub Projects board: mark "Create POST /users/register route" as Done, move "Create POST /auth/login route" to In Progress
-- Commit today's work to Git (see command below)
-- `check_db.py` deleted; **`seed_household.py` intentionally kept** as a dev utility for testing — flagged for removal once a real `POST /households` route exists (don't forget this one, it's not part of the actual app)
-- Next task: `POST /auth/login` route (JWT), then route protection middleware
+- ✅ Update GitHub Projects board: mark "Create POST /auth/login route" as Done, move "Middleware/dependency to protect routes with a token" to In Progress
+- Commit today's work to Git
+- **Recurring habit to watch:** double-check which folder is selected in VSCode's file explorer before creating new files — `seed_household.py` and `.env`/`.env.example` have both ended up inside `app/` by mistake so far when they belonged at the project root
+- `seed_household.py` still kept intentionally as a dev utility — still flagged for removal once a real `POST /households` route exists
+- Next task: route-protection middleware/dependency (so future routes can require a valid token), then testing the full flow via `/docs`
 
 ---
