@@ -68,7 +68,7 @@ Then, save the exact list of installed dependencies:
 ```bash
 pip freeze > requirements.txt
 ```
-This guarantees that when you clone the project on another computer (or I review your code), `pip install -r requirements.txt` installs the exact same versions.
+This guarantees that when the project is cloned on another computer (or reviewed with AI assistance), `pip install -r requirements.txt` installs the exact same versions.
 
 ## 7. `.gitignore` file
 

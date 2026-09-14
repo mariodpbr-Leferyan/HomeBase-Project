@@ -25,6 +25,10 @@ HomeBase is a web application (with a planned evolution into a PWA/mobile experi
 
 This project starts as a **personal, experimental portfolio piece**, with the goal of later being made available publicly.
 
+## How this project is built
+
+HomeBase is developed by me, hands-on, writing the majority of the code myself — with guidance from an AI assistant (Claude, by Anthropic) acting as a mentor: explaining concepts, reviewing code, and catching mistakes, without writing the features in my place. The full methodology is documented in [`docs/LEARNING_GUIDE.md`](docs/LEARNING_GUIDE.md), and each work session is logged in [`docs/PROGRESS.md`](docs/PROGRESS.md).
+
 ## Why this README is short
 
 All detailed documentation lives in the [`/docs`](docs/) folder, organized by topic so it's easy to navigate and keep up to date as the project progresses:

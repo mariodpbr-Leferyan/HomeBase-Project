@@ -65,7 +65,7 @@ When you start working on it: change `Status` to `In Progress`. Once the code is
 
 ## Part 3 — Full backlog (tasks by Sprint)
 
-Use this list to create the Issues. You don't need to create them all at once — I suggest creating the current sprint's + the next one's, so you don't spend more time managing tasks than writing code.
+Use this list to create the Issues. You don't need to create them all at once — recommended approach: create the current sprint's + the next one's, so you don't spend more time managing tasks than writing code.
 
 ### Sprint 0 — Setup (Sep 1–7) · Epic 1
 - [ ] Install Python and confirm version

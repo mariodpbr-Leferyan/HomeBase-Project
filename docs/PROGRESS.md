@@ -111,8 +111,20 @@ This log tracks work sessions on the project: what was done, time spent, and pau
 
 **Reminders for next session:**
 - ✅ Update GitHub Projects board: mark "Create POST /users/register route" as Done, move "Create POST /auth/login route" to In Progress
-- Commit today's work to Git (see command below)
+- ✅ Committed and pushed
 - `check_db.py` deleted; **`seed_household.py` intentionally kept** as a dev utility for testing — flagged for removal once a real `POST /households` route exists (don't forget this one, it's not part of the actual app)
 - Next task: `POST /auth/login` route (JWT), then route protection middleware
+
+**Session 3 closed at 18:04.**
+
+---
+
+## Session 4 — October 14, 2026
+
+**Resumed at:** 17:25. **Pause since last session: 3 days, 23h 21min** (Sept 10, 18:04 → Sept 14, 17:25).
+
+**What was done so far this session:**
+
+*(To be continued as the session progresses — update this section before closing out.)*
 
 ---

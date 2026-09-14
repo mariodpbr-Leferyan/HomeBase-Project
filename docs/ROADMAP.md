@@ -4,7 +4,7 @@ This document is the full map of the project, from zero to launch. Each phase ha
 - **Goal** — what we'll be able to do by the end of the phase
 - **What it involves** — the technical pieces to build
 - **Done criteria** — how we know it's ready to move on
-- **Who writes what** — for the code part, what's yours to write (with my guidance) and what's more infrastructure/configuration
+- **Who writes what** — what's mine to write myself (with AI guidance) and what's more infrastructure/configuration
 
 Order matters: each phase builds on the previous one. Don't skip phases, even if they seem "boring" — Phases 0 and 1, for example, are the foundation for everything else.
 
@@ -22,7 +22,7 @@ What it involves:
 
 **Done when:** you can run `python --version`, `git status`, and open the project in VSCode with no errors, and the repository exists on GitHub with this `README.md` and the `docs/` folder.
 
-**You write:** no "code" yet — but you set all of this up with my step-by-step guidance.
+**You write:** no "code" yet — but everything gets set up with step-by-step AI guidance.
 
 ---
 
@@ -156,7 +156,7 @@ What it involves (the focus here shifts to guided explanation, since this is you
 
 **Done when:** you can navigate every feature through the browser, without using technical tools (Postman, etc.)
 
-**You write:** the simplest HTML/CSS with my line-by-line support; the frontend architecture part is explained more by me, given your current level in that area.
+**You write:** the simplest HTML/CSS with line-by-line AI support; the frontend architecture part is explained in more detail by the AI, given the lower starting confidence in this area.
 
 ---
 
